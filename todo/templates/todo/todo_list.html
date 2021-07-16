@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<br>
+<a href={% url 'todo:todo_create' %}>Create new todo</a>
+<br><br><br>
+<ul>
+  {% for todo in my_todo_list.all %}
+  <li>
+    <p class="{% if todo.important %}fw-bold {% endif %}">
+      <a href={% url 'todo:todo_update' todo.pk %}><i class="far fa-edit"></i></a>
+      <a href={% url 'todo:todo_delete' todo.pk %}> <i class="far fa-trash-alt"></i> </a>
+      <a href={% url 'todo:todo_detail' todo.pk %}>{{ todo }} </a>
+    </p>
+  </li>
+    <ul>
+      <li>User: {{ todo.user }}</li>
+      <li>Descriptoion: {{ todo.description}}</li>
+      <li>Created: {{ todo.created }}</li>
+    </ul>
+  {% endfor %}
+
+</ul>
+
+{% endblock %}
